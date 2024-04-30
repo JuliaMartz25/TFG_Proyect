@@ -142,7 +142,9 @@ PlayerSettings:
   bundleVersion: 0.1
   preloadedAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  - {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
   - {fileID: -5420735548653408933, guid: 1e2381b697a41a846815dc9244c6557c, type: 2}
+  - {fileID: 11400000, guid: b703aa78cd4002044b9dd18221d80a02, type: 2}
   - {fileID: 7102801038670390505, guid: 62b3ad8c4cb1b464c99ddd3bd5101931, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -173,7 +175,7 @@ PlayerSettings:
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 27
+  AndroidMinSdkVersion: 26
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
