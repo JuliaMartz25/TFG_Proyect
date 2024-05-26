@@ -75,9 +75,9 @@ public class Bot : MonoBehaviour
         //existe en nuestro NavMesh, si no tendremos problemas cuando seteemos la
         //"location" ya que el circulo de movimiento del personaje cubrira una zona
         //no navegable por el mismo
-        float wanderRadius   = 5f;
-        float wanderDistance = 3f;
-        float wanderJitter   = 1f; //Valor pequeño, probar tambien con 10
+        float wanderRadius   = 4f;
+        float wanderDistance = 8f;
+        float wanderJitter   = 4f; //Valor pequeño, probar tambien con 10
 		
 		//wanderTarget es una posicion del circulo, modificamos aleatoriamente la X
 		//y la Z, dejando 0 en la Y para que no afecte
@@ -223,7 +223,7 @@ public class Bot : MonoBehaviour
         //Flee(target.transform.position);
         //Pursue();
         //Evade();
-       // Wander();
+        //Wander();
         //Hide();
 
        if (!coolDown)
@@ -240,8 +240,8 @@ public class Bot : MonoBehaviour
                 Invoke("BehaviourCoolDown", 5); //Cool down 5 seconds
                 print("cleverHide");
             }
-           // else
-                //Pursue(); print("persigo");
+            else
+                Pursue();
 
         }
     }
