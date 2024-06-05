@@ -75,9 +75,9 @@ public class Bot : MonoBehaviour
         //existe en nuestro NavMesh, si no tendremos problemas cuando seteemos la
         //"location" ya que el circulo de movimiento del personaje cubrira una zona
         //no navegable por el mismo
-        float wanderRadius   = 4f;
-        float wanderDistance = 8f;
-        float wanderJitter   = 4f; //Valor pequeño, probar tambien con 10
+        float wanderRadius   = 10f;
+        float wanderDistance = 20f;
+        float wanderJitter   = 10f; //Valor pequeño, probar tambien con 10
 		
 		//wanderTarget es una posicion del circulo, modificamos aleatoriamente la X
 		//y la Z, dejando 0 en la Y para que no afecte
