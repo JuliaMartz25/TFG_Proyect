@@ -223,10 +223,10 @@ public class Bot : MonoBehaviour
         //Flee(target.transform.position);
         //Pursue();
         //Evade();
-        //Wander();
+        Wander();
         //Hide();
 
-       if (!coolDown)
+      /* if (!coolDown)
         {
             if (!TargetInRange())
             {
@@ -243,7 +243,7 @@ public class Bot : MonoBehaviour
             else
                 Pursue();
 
-        }
+        }*/
     }
 
 }
