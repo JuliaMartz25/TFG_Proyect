@@ -9664,8 +9664,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 3.879192, z: 2}
-  m_Center: {x: 0, y: 1.939596, z: 0}
+  m_Size: {x: 2.7230015, y: 3.879192, z: 2.7346206}
+  m_Center: {x: -0.006846428, y: 1.939596, z: 0.015558004}
 --- !u!114 &966487081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9680,6 +9680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barra: {fileID: 430228554}
   vidaActual: 100
+  bateria: {fileID: 1399583089}
   defaultcolor: {r: 1, g: 1, b: 1, a: 0}
   newcolor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1 &992209721
@@ -10517,8 +10518,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 3.879192, z: 2}
-  m_Center: {x: 0, y: 1.939596, z: 0}
+  m_Size: {x: 2.7710378, y: 3.879192, z: 2.619935}
+  m_Center: {x: -0.01665771, y: 1.939596, z: -0.11666727}
 --- !u!114 &1121389480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10533,6 +10534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barra: {fileID: 838849368}
   vidaActual: 100
+  bateria: {fileID: 1399583089}
   defaultcolor: {r: 1, g: 1, b: 1, a: 0}
   newcolor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1 &1167092876
@@ -11673,7 +11675,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -11685,7 +11687,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -12574,8 +12576,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 3.879192, z: 2}
-  m_Center: {x: 0, y: 1.939596, z: 0}
+  m_Size: {x: 2.8525176, y: 3.879192, z: 2.9461308}
+  m_Center: {x: 0.1233263, y: 1.939596, z: 0.064642906}
 --- !u!114 &1541169571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12590,6 +12592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barra: {fileID: 933124853}
   vidaActual: 100
+  bateria: {fileID: 1399583089}
   defaultcolor: {r: 1, g: 1, b: 1, a: 0}
   newcolor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1001 &1596761454
@@ -14204,6 +14207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barra: {fileID: 660685425}
   vidaActual: 100
+  bateria: {fileID: 1399583089}
   defaultcolor: {r: 1, g: 1, b: 1, a: 0}
   newcolor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1 &2115045621

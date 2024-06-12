@@ -12,7 +12,7 @@ public class Bateria : MonoBehaviour
     [SerializeField] private float vidaActual =100;
     private float danyo = 5f;
     private float timer;
-    Enemies bateria;
+   public Enemies bateria;
 
     private Renderer renderObj;
     public Color defaultcolor;
@@ -60,9 +60,10 @@ public class Bateria : MonoBehaviour
         if (vidaActual <= 0)
         {
             vidaActual = 0;
-
-           
+          
+            bateria.bateries.Remove(bateria.bateries[bateria.currentBatery]);
             Destroy(this.gameObject);
+
         }
     }
 }
