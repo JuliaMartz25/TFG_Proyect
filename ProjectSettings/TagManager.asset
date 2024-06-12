@@ -4,20 +4,23 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - hide
+  - Socket
+  - Hide
+  - Batery
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - HiddenMesh
   - Water
   - UI
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Character
+  - MirroredCharacter
   - 
   - 
   - 
