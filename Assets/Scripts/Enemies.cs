@@ -57,12 +57,4 @@ public class Enemies : MonoBehaviour
 
    
 }
-public class LinternaEnemy : Enemies
-{
 
-}
-
-public class FootEnemy : Enemies
-{
-
-}
