@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
@@ -9,16 +10,14 @@ using UnityEngine.UI;
 
 public class Bateria : MonoBehaviour
 {
-   [SerializeField] private  Image barra;
+   
+    [SerializeField] private  Image barra;
     private float vidaMaxima =100f;
-    [SerializeField] private float vidaActual =100;
+   public float vidaActual =100;
     private float danyo = 5f;
     private float timer;
-    public Enemies bateria;
-  
-  
-
-
+    public GameManager gameManager;
+    
     private Renderer renderObj;
     public Color defaultcolor;
     public Color newcolor;
@@ -34,11 +33,20 @@ public class Bateria : MonoBehaviour
     {
         Vida();
 
+       
     }
     private void Vida()
     {
         barra.fillAmount = vidaActual / vidaMaxima;
-        
+
+        if (vidaActual <= 0)
+        {
+            vidaActual = 0;
+            gameManager.bateries.Remove(this.gameObject);
+            
+           
+        }
+
     }
    
     private void CambiarColor(Color color, float timer)
@@ -67,17 +75,6 @@ public class Bateria : MonoBehaviour
             else
             {
                 CambiarColor(defaultcolor, timer);
-            }
-
-            //Si lavida es menor o igual a cero eliminar la bateria
-
-            if (vidaActual <= 0)
-            {
-                vidaActual = 0;
-
-                bateria.bateries.Remove(bateria.bateries[bateria.currentBatery]);
-                Destroy(this.gameObject);
-             
             }
 
 

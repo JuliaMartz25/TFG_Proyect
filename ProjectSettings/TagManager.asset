@@ -9,6 +9,8 @@ TagManager:
   - Batery
   - Enemy
   - Ball
+  - HandR
+  - HandL
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - HiddenMesh
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 
