@@ -6,17 +6,11 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private Rigidbody rigibody;
     float timer;
-    [Range (0,1f)]
-    public float bounciness;
-    PhysicMaterial physicMat;
+   
 
     private void Start()
     { 
-        physicMat = new PhysicMaterial();
-        physicMat.bounciness = bounciness;
-        physicMat.frictionCombine = PhysicMaterialCombine.Minimum;
-        physicMat.bounceCombine = PhysicMaterialCombine.Maximum;
-        GetComponent<SphereCollider>().material = physicMat;
+      
         
     }
     void Update()
@@ -33,8 +27,7 @@ public class Ball : MonoBehaviour
             {
                
                 rigibody.useGravity = true;
-               this.gameObject.transform.SetParent(null);
-                timer = 0;
+                 timer = 0;
             }
             else
             {

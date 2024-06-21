@@ -11,6 +11,7 @@ TagManager:
   - Ball
   - HandR
   - HandL
+  - Puerta
   layers:
   - Default
   - TransparentFX
