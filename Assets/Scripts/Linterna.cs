@@ -11,9 +11,9 @@ public class Linterna : MonoBehaviour
     public GameObject linterna, socket;
     RaycastHit hit;
     int layerMask = 1<<6;
-    public Enemies enemies;
+    public GameManager gameManager;
     public  bool detectado;
-    public GameManager manager;
+    
     private void Start()
     {
         luz.enabled = false;
@@ -34,14 +34,15 @@ public class Linterna : MonoBehaviour
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
                 Debug.Log("Did Hit");
-                enemies.EnemyHide();
                 detectado = true;
+               
+                
             }
             else
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.red);
                 Debug.Log("Did not Hit");
-                detectado = false;
+             
             }
 
         }
@@ -75,13 +76,13 @@ public class Linterna : MonoBehaviour
             EncenderLinternaR();
     
         }
-        else
+        if(collision.gameObject.tag != "HandR")
         {
             //Lanzamiento Bola
             if (OVRInput.GetDown(OVRInput.RawButton.B))
             {
 
-                manager.ThrowingBall();
+                gameManager.ThrowingBall();
 
             }
         }
@@ -92,13 +93,15 @@ public class Linterna : MonoBehaviour
             EncenderLinternaL();
  
         }
-        else
+
+        //Si no tengo la linterna en la mano
+        if (collision.gameObject.tag != "HandL")
         {
             //Lanzamiento Bola
             if (OVRInput.GetDown(OVRInput.RawButton.B))
             {
 
-                manager.ThrowingBall();
+                gameManager.ThrowingBall();
 
             }
         }

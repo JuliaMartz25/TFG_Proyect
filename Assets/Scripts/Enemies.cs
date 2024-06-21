@@ -31,6 +31,7 @@ public class Enemies : MonoBehaviour
         {
             EnemyMovement();
         }
+      
        
   
     }
@@ -93,6 +94,7 @@ public class Enemies : MonoBehaviour
         if (manager.puertas.Count > 0)
         {
             agent.SetDestination(manager.bateries[currentPuerta].transform.position);
+           
         }
     }
 
