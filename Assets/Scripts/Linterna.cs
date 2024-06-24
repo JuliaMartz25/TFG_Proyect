@@ -24,7 +24,6 @@ public class Linterna : MonoBehaviour
     }
     public void EncenderLinternaR()
     {
-       
 
         if (OVRInput.GetDown(OVRInput.RawButton.A) && luz.enabled == false)
         {
@@ -35,8 +34,7 @@ public class Linterna : MonoBehaviour
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
                 Debug.Log("Did Hit");
                 detectado = true;
-               
-                
+ 
             }
             else
             {

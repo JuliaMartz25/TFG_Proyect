@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
+
 
 public class Enemies : MonoBehaviour
 {
     public NavMeshAgent agent;
     public int currentBatery, currentPuerta;
-    public GameObject target;
     public GameManager manager;
     public Linterna linterna;
+    public GameObject canvas;
  
   
 
     private void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
+        manager = FindFirstObjectByType<GameManager>();
+        linterna = FindFirstObjectByType<Linterna>();
+        // EEEROR CANVAS GAME OBJECT HAY QUE PONERLO NE JERARQUIA canvas = FindFirstObjectByType<GameObject>();
+
+
+
+
     }
 
     private void Update()
@@ -63,7 +70,7 @@ public class Enemies : MonoBehaviour
         else
         {
             agent.speed = 0; 
-            print("You lose");
+           canvas.SetActive(true);
 
         }
 
@@ -77,10 +84,10 @@ public class Enemies : MonoBehaviour
         float value = Mathf.Infinity; // Resetea el valor 
 
         // Recorro la array de puertas en busca de la mas cercana
-        for (int i = 0; i < manager.puertas.Count; i++)
+        for (int i = 0; i < manager.doors.Count; i++)
         {
             // Si la bateria es la mas cercana voy a ella
-            float puertadist = Vector3.Distance(manager.puertas[i].transform.position, agent.transform.position);
+            float puertadist = Vector3.Distance(manager.doors[i].transform.position, agent.transform.position);
 
             //Si el valor de la distancia es menor, entonces la bateria es i y actualizamos el valor
             if (puertadist < value)
@@ -91,9 +98,9 @@ public class Enemies : MonoBehaviour
         }
 
         // Si siguen quedando baterias entonces envio al enemigo a la bateria mas cercana
-        if (manager.puertas.Count > 0)
+        if (manager.doors.Count > 0)
         {
-            agent.SetDestination(manager.bateries[currentPuerta].transform.position);
+            agent.SetDestination(manager.doors[currentPuerta].transform.position);
            
         }
     }

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> bateries = new List<GameObject>();
-    public List<GameObject> puertas = new List<GameObject>();
+    public List<GameObject> doors = new List<GameObject>();
 
     //BALL POOL SIZE
     public int ballPoolSize = 13; //Tamaño de la array de objetos a reciclar
@@ -18,6 +18,15 @@ public class GameManager : MonoBehaviour
     public int throwNumber = -1; //Número con la posición del array que toca activar y gestionar
     public Transform ballspawnpos;
 
+    //OLEADAS
+    public GameObject[] spawnPoints;
+    public GameObject[] enemies;
+    public int waveCount;
+    public int wave;
+    public int enemyType;
+    public bool spawning;
+    private int enemiesSpawned;
+    public int enemiesdefeat;
 
     void Start()
     {
@@ -35,9 +44,59 @@ public class GameManager : MonoBehaviour
             balls[i] = Instantiate(ball, new Vector2(0, -10), Quaternion.identity);
             ball.SetActive(false);
         }
+
+        waveCount = 2; //Enemigos que aumentan cada oleada
+        wave = 1;
+        spawning = false;
+        enemiesSpawned = 0;
     }
 
-   
+    private void Update()
+    {
+        if(spawning == false && enemiesSpawned == enemiesdefeat) 
+        {
+            StartCoroutine(SpawnWave(waveCount));
+        }
+    }
+    IEnumerator SpawnWave(int waveC)
+    {
+        spawning = true;
+        yield return new WaitForSeconds(4); 
+
+        for(int i = 0;i < waveC;i++)
+        {
+            SpawnEnemy(wave);
+            yield return new WaitForSeconds(2);
+        }
+        wave += 1;
+        waveCount += 2;
+        spawning = false;
+
+        yield break;
+    }
+    void SpawnEnemy(int wave)
+    {
+        int spawnPos = Random.Range(0,4);
+        if (wave ==1)
+        {
+            enemyType = 1;
+        }
+        else if((wave <4))
+        {
+            enemyType = Random.Range(0,2);
+        }
+        else
+        {
+            enemyType = Random.Range(0, 3);
+        }
+
+
+        Instantiate(enemies[enemyType], spawnPoints[spawnPos].transform.position, spawnPoints[spawnPos].transform.rotation);
+        enemiesSpawned++;
+
+
+    }
+    //OLEADAS FIN
     public void BaterySearch()
     {
         //Lista de baterias  
@@ -46,19 +105,15 @@ public class GameManager : MonoBehaviour
             bateries.Add(baterias);
 
         }
-
-      
     }
     public void DoorSearch()
     {
         //Lista de baterias  
-        foreach (GameObject baterias in GameObject.FindGameObjectsWithTag("Puerta"))
+        foreach (GameObject puertas in GameObject.FindGameObjectsWithTag("Puerta"))
         {
-            puertas.Add(baterias);
+           doors.Add(puertas);
 
         }
-
-
     }
     public void ThrowingBall()
     {
@@ -81,13 +136,24 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-   public void Salir()
+    public void SalirMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void Salir()
     {
         Application.Quit();
     }
+
+
+
+
+
+
+
 }
 
-//Hide Objects
+/*//Hide Objects
 public sealed class World
 {
     private static readonly World instance = new World();
@@ -103,4 +169,5 @@ public sealed class World
         get { return instance; }
     }
     public GameObject[] GetHidingSpots() { return hidingspots; }
-}
+}*/
+

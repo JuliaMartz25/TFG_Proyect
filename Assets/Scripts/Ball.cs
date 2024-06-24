@@ -6,13 +6,7 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private Rigidbody rigibody;
     float timer;
-   
-
-    private void Start()
-    { 
-      
-        
-    }
+  
     void Update()
     {
         if (this.gameObject == null)

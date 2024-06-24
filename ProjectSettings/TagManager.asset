@@ -12,6 +12,7 @@ TagManager:
   - HandR
   - HandL
   - Puerta
+  - Canvas
   layers:
   - Default
   - TransparentFX

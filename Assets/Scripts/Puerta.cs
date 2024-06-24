@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Puerta : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public Linterna linterna;
+    public GameManager _manager;
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
+            linterna.detectado = false;
+            _manager.enemiesdefeat++;
         }
     }
+   
 }
