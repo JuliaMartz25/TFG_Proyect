@@ -10,7 +10,7 @@ public class Enemies : MonoBehaviour
     public NavMeshAgent agent;
     public int currentBatery, currentPuerta;
     public GameManager manager;
-    public Linterna linterna;
+    public Linterna linterna1,linterna2;
    
 
 
@@ -18,8 +18,10 @@ public class Enemies : MonoBehaviour
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
         manager = FindFirstObjectByType<GameManager>();
-        linterna = FindFirstObjectByType<Linterna>();
       
+       
+
+
 
 
 
@@ -28,10 +30,11 @@ public class Enemies : MonoBehaviour
 
     private void Update()
     {
-        if (linterna.detectado ==true)
+        if (linterna1.detectado ==true || linterna2.detectado == true)
         {
-            print("me asusto");
+           
             EnemyHide();
+            print("hide");
         }
         else
         {
@@ -43,7 +46,7 @@ public class Enemies : MonoBehaviour
    
    public void EnemyMovement()
     {
-        print("muevo");
+       
         float value = Mathf.Infinity; // Resetea el valor 
 
         // Recorro la array de baterias en busca de la mas cercana

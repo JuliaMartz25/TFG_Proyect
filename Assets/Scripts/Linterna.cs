@@ -12,16 +12,16 @@ public class Linterna : MonoBehaviour
     RaycastHit hit;
     int layerMask = 1<<6;
     public GameManager gameManager;
-    public  bool detectado, luzencendida;
+    public  bool detectado, encendida;
     
     private void Start()
     {
-       
+       encendida = true;
     }
     private void Update()
     {
-        print("luz"+luzencendida);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask) && luzencendida == true)
+        
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask) && encendida==true )
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
@@ -43,7 +43,7 @@ public class Linterna : MonoBehaviour
           
             luz.enabled = false;
 
-           luzencendida = true;
+            encendida = false;
 
 
         }
@@ -51,7 +51,8 @@ public class Linterna : MonoBehaviour
         {
 
             luz.enabled = true;
-            luzencendida = false;
+            encendida = true;
+
         }
 
     }
@@ -61,15 +62,16 @@ public class Linterna : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.RawButton.X) && luz.enabled == false)
         {
             luz.enabled = true;
-            luzencendida = true;
 
+            encendida = true;
 
         }
         else if (OVRInput.GetDown(OVRInput.RawButton.X) && luz.enabled == true)
         {
 
             luz.enabled = false;
-            luzencendida = false;
+            encendida = false;
+
         }
 
     }

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public List<GameObject> bateries = new List<GameObject>();
     public List<GameObject> doors = new List<GameObject>();
+    public List<GameObject>enemiesIngame = new List<GameObject>();
 
     public GameObject canvasGameOver, canvaswWin;
 
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        EnemiesIngame();
         BaterySearch();
         DoorSearch();
 
@@ -53,7 +55,13 @@ public class GameManager : MonoBehaviour
         spawning = false;
         enemiesSpawned = 0;*/
     }
-
+    private void Update()
+    {
+        if (enemiesIngame.Count<=0)
+        {
+            Win();
+        }
+    }
     /*private void Update()
     {
         if(spawning == false && enemiesSpawned == enemiesdefeat) 
@@ -100,6 +108,15 @@ public class GameManager : MonoBehaviour
 
     }*/
     //OLEADAS FIN
+    public void EnemiesIngame()
+    {
+        //Lista de baterias  
+        foreach (GameObject baterias in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            enemiesIngame.Add(baterias);
+
+        }
+    }
     public void BaterySearch()
     {
         //Lista de baterias  

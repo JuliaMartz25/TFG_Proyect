@@ -11,7 +11,7 @@ public class EnemyGolpe : Enemies
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
         manager = FindFirstObjectByType<GameManager>();
-        linterna = FindFirstObjectByType<Linterna>();
+       
        
     }
 
@@ -27,7 +27,7 @@ public class EnemyGolpe : Enemies
         if (collision.gameObject.tag == "Ball")
         {
             Destroy(this.gameObject);
-            //manager.enemiesdefeat++;
+            manager.enemiesIngame.Remove(this.gameObject);
         }
     }
 
