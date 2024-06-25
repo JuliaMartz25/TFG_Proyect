@@ -9,10 +9,13 @@ public class EnemyGolpe : Enemies
    
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Linterna");
         agent = gameObject.GetComponent<NavMeshAgent>();
         manager = FindFirstObjectByType<GameManager>();
-       
-       
+        linterna1 = FindFirstObjectByType<Linterna>();
+        linterna2 = player.GetComponent<Linterna>();
+
+
     }
 
     // Update is called once per frame
@@ -26,8 +29,9 @@ public class EnemyGolpe : Enemies
     {
         if (collision.gameObject.tag == "Ball")
         {
-            Destroy(this.gameObject);
             manager.enemiesIngame.Remove(this.gameObject);
+            gameObject.SetActive(false);
+          
         }
     }
 

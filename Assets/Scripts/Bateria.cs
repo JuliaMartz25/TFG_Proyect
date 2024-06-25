@@ -17,7 +17,8 @@ public class Bateria : MonoBehaviour
     private float danyo = 5f;
     private float timer;
     public GameManager gameManager;
-    
+    public bool recuperaVida = false;
+
     public Renderer renderObj;
     public Color defaultcolor;
     public Color newcolor;
@@ -33,14 +34,18 @@ public class Bateria : MonoBehaviour
     void Update()
     {
         Vida();
+        if (vidaActual == 10 && recuperaVida && !gameManager.bateries.Contains(this.gameObject))
+        {
+            gameManager.bateries.Add(this.gameObject);
+        }
 
-       
+
     }
     private void Vida()
     {
         barra.fillAmount = vidaActual / vidaMaxima;
 
-        if (vidaActual <= 0)
+        if (vidaActual == 0)
         {
             vidaActual = 0;
             gameManager.bateries.Remove(this.gameObject);
@@ -52,6 +57,8 @@ public class Bateria : MonoBehaviour
         {
             renderObj.material.color = defaultcolor;
         }
+
+        
 
     }
    

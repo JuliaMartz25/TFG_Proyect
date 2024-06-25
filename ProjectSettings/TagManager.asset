@@ -13,6 +13,8 @@ TagManager:
   - HandL
   - Puerta
   - Canvas
+  - Linterna
+  - Posiciones
   layers:
   - Default
   - TransparentFX

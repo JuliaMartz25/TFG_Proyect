@@ -10,9 +10,11 @@ public class Puerta : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+             _manager.enemiesIngame.Remove(collision.gameObject);
 
-            _manager.enemiesIngame.Remove(this.gameObject);
+            collision.gameObject.SetActive(false);
+
+           
         }
     }
    

@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> bateries = new List<GameObject>();
     public List<GameObject> doors = new List<GameObject>();
     public List<GameObject>enemiesIngame = new List<GameObject>();
+
+   
 
     public GameObject canvasGameOver, canvaswWin;
 
@@ -20,23 +24,20 @@ public class GameManager : MonoBehaviour
     private GameObject[] balls; //Array de objetos a reciclar
     public int throwNumber = -1; //Número con la posición del array que toca activar y gestionar
     public Transform ballspawnpos;
+
+    public Text textTimer, oleada;
+    public float Timer; 
    
-
-    //OLEADAS
-    /*public GameObject[] spawnPoints;
-    public GameObject[] enemies;
-    public int waveCount;
-    public int wave;
-    public int enemyType;
-    public bool spawning;
-    private int enemiesSpawned;
-    public int enemiesdefeat;*/
-
+    public List<Transform> enemiespos = new List<Transform>();
+    public GameObject enemy1, enemy2, enemy3;
+    public static int currentWave = 0;
+    
     void Start()
     {
         EnemiesIngame();
         BaterySearch();
         DoorSearch();
+        EnemiesSpaenPos();
 
         //Creamos la array con un tamaño igual al de la variable int primera
         balls = new GameObject[ballPoolSize];
@@ -50,70 +51,50 @@ public class GameManager : MonoBehaviour
             ball.SetActive(false);
         }
 
-        /*waveCount = 2; //Enemigos que aumentan cada oleada
-        wave = 1;
-        spawning = false;
-        enemiesSpawned = 0;*/
+        
+    
     }
     private void Update()
     {
-        if (enemiesIngame.Count<=0)
+        Timer += Time.deltaTime;
+       
+        int minutes = Mathf.FloorToInt(Timer /60);
+        int seconds = Mathf.FloorToInt(Timer %60);
+        textTimer.text = string.Format("{0:00}:{1:00}",minutes,seconds);
+        oleada.text = "OLEADA "+currentWave+" SUPERADA";
+        if(minutes >= 3 && seconds >= 0)
+        {
+            minutes = 3;
+            seconds = 0;
+            GameOver();
+            Time.timeScale = 0;
+        }
+
+        if (enemiesIngame.Count==0 && minutes <= 3 )
         {
             Win();
+           
+        }
+
+      
+        
+    }
+
+    public void EnemiesSpaenPos()
+    {
+      
+        foreach (GameObject posiciones in GameObject.FindGameObjectsWithTag("Posiciones"))
+        {
+            enemiespos.Add(posiciones.transform);
+
         }
     }
-    /*private void Update()
-    {
-        if(spawning == false && enemiesSpawned == enemiesdefeat) 
-        {
-            StartCoroutine(SpawnWave(waveCount));
-        }
-    }
-    IEnumerator SpawnWave(int waveC)
-    {
-        spawning = true;
-        yield return new WaitForSeconds(4); 
-
-        for(int i = 0;i < waveC;i++)
-        {
-            SpawnEnemy(wave);
-            yield return new WaitForSeconds(2);
-        }
-        wave += 1;
-        waveCount += 2;
-        spawning = false;
-
-        yield break;
-    }
-    void SpawnEnemy(int wave)
-    {
-        int spawnPos = Random.Range(0,4);
-        if (wave ==1)
-        {
-            enemyType = 1;
-        }
-        else if((wave <4))
-        {
-            enemyType = Random.Range(0,2);
-        }
-        else
-        {
-            enemyType = Random.Range(0, 3);
-        }
-
-
-        Instantiate(enemies[enemyType], spawnPoints[spawnPos].transform.position, spawnPoints[spawnPos].transform.rotation);
-        enemiesSpawned++;
-
-
-    }*/
-    //OLEADAS FIN
     public void EnemiesIngame()
     {
-        //Lista de baterias  
-        foreach (GameObject baterias in GameObject.FindGameObjectsWithTag("Enemy"))
+        //Lista de enemigos en escena 
+        foreach (GameObject enemies in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            enemiesIngame.Add(baterias);
+            enemiesIngame.Add(enemies);
 
         }
     }
@@ -128,7 +109,7 @@ public class GameManager : MonoBehaviour
     }
     public void DoorSearch()
     {
-        //Lista de baterias  
+        //Lista de puertas
         foreach (GameObject puertas in GameObject.FindGameObjectsWithTag("Puerta"))
         {
            doors.Add(puertas);
@@ -152,9 +133,49 @@ public class GameManager : MonoBehaviour
         balls[throwNumber].SetActive(true);
     }
 
-   public void Jugar()
+    public void OleadasEnemigos()
+    {
+        if (currentWave == 0)
+        {
+            Instantiate(enemy1, enemiespos[Random.Range(0, 4)]);
+        }
+
+        if (currentWave == 1)
+        {
+            Instantiate(enemy1, enemiespos[Random.Range(0, 4)]);
+            StartCoroutine("Aparicion2");
+            Instantiate(enemy2, enemiespos[Random.Range(0, 4)]);
+        }
+
+        if (currentWave == 2)
+        {
+            Instantiate(enemy1, enemiespos[Random.Range(0, 4)]);
+            StartCoroutine("Aparicion2");
+            Instantiate(enemy2, enemiespos[Random.Range(0, 4)]);
+            StartCoroutine("Aparicion");
+            Instantiate(enemy3, enemiespos[Random.Range(0, 4)]);
+        }
+    }
+
+    IEnumerator Aparicion2()
+    {
+        yield return new WaitForSeconds(2f);
+    }
+
+    IEnumerator Aparicion()
+    {
+        yield return new WaitForSeconds(4f);
+    }
+
+
+    public void Jugar()
     {
         SceneManager.LoadScene(1);
+    }
+    public void Seguir()
+    {
+        SceneManager.LoadScene(1);
+        currentWave++;
     }
     public void SalirMenu()
     {
@@ -179,6 +200,8 @@ public class GameManager : MonoBehaviour
 
 
 }
+
+
 
 /*//Hide Objects
 public sealed class World

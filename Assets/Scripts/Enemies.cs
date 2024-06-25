@@ -10,16 +10,18 @@ public class Enemies : MonoBehaviour
     public NavMeshAgent agent;
     public int currentBatery, currentPuerta;
     public GameManager manager;
-    public Linterna linterna1,linterna2;
-   
+    public Linterna  linterna1,linterna2;
+    public GameObject player;
 
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Linterna");
         agent = gameObject.GetComponent<NavMeshAgent>();
         manager = FindFirstObjectByType<GameManager>();
-      
-       
+        linterna1 = FindFirstObjectByType<Linterna>();
+        linterna2 = player.GetComponent<Linterna>();
+
 
 
 
