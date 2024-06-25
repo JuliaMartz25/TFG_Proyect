@@ -12,8 +12,7 @@ public class EnemyGolpe : Enemies
         player = GameObject.FindGameObjectWithTag("Linterna");
         agent = gameObject.GetComponent<NavMeshAgent>();
         manager = FindFirstObjectByType<GameManager>();
-        linterna1 = FindFirstObjectByType<Linterna>();
-        linterna2 = player.GetComponent<Linterna>();
+       
 
 
     }

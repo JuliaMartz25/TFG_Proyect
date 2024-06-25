@@ -9,123 +9,100 @@ public class Linterna : MonoBehaviour
 {
     public Light luz;
     public GameObject linterna, socket;
-    RaycastHit hit;
-    int layerMask = 1<<6;
+    public RaycastHit hit;
+    int layerMask = 1 << 6; // Asegúrate de que tus NPCs estén en la capa 6
     public GameManager gameManager;
-    public  bool detectado, encendida;
-    
+    public bool encendida;
+
     private void Start()
     {
-       encendida = true;
+        encendida = true;
     }
+
     private void Update()
     {
-        
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask) && encendida==true )
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-            detectado = true;
+       
 
-        }
-        else
+        if (encendida)
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.red);
-            Debug.Log("Did not Hit");
-
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask))
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
+                Debug.Log("Did Hit: " + hit.collider.gameObject.name);
+                hit.collider.gameObject.SendMessage("OnRaycastHit", SendMessageOptions.DontRequireReceiver);
+            }
+            else
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.red);
+                Debug.Log("Did not Hit");
+            }
         }
     }
+
     public void EncenderLinternaR()
     {
-
-        if (OVRInput.GetDown(OVRInput.RawButton.A) && luz.enabled == true )
+        if (OVRInput.GetDown(OVRInput.RawButton.A))
         {
-          
-            luz.enabled = false;
-
-            encendida = false;
-
-
+            luz.enabled = !luz.enabled;
+            encendida = luz.enabled;
         }
-        else if (OVRInput.GetDown(OVRInput.RawButton.A)  && luz.enabled == false)
-        {
-
-            luz.enabled = true;
-            encendida = true;
-
-        }
-
     }
+
     public void EncenderLinternaL()
     {
-        
-        if (OVRInput.GetDown(OVRInput.RawButton.X) && luz.enabled == false)
+        if (OVRInput.GetDown(OVRInput.RawButton.X))
         {
-            luz.enabled = true;
-
-            encendida = true;
-
+            luz.enabled = !luz.enabled;
+            encendida = luz.enabled;
         }
-        else if (OVRInput.GetDown(OVRInput.RawButton.X) && luz.enabled == true)
-        {
-
-            luz.enabled = false;
-            encendida = false;
-
-        }
-
     }
+
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "HandR")
         {
-           
             EncenderLinternaR();
-
-
         }
-        if(collision.gameObject.tag != "HandR")
+        else if (collision.gameObject.tag == "HandL")
         {
-            //Lanzamiento Bola
-            if (OVRInput.GetDown(OVRInput.RawButton.B))
-            {
-
-                gameManager.ThrowingBall();
-
-            }
-        }
-
-        if (collision.gameObject.tag == "HandL")
-        {
-           
             EncenderLinternaL();
+        }
+       
+            if (collision.gameObject.tag != "HandR")
+            {
+                //Lanzamiento Bola
+                if (OVRInput.GetDown(OVRInput.RawButton.B))
+                {
+
+                    gameManager.ThrowingBall();
+
+                }
+            }
 
           
-        }
 
-        //Si no tengo la linterna en la mano
-        if (collision.gameObject.tag != "HandL" )
-        {
-            //Lanzamiento Bola
-            if (OVRInput.GetDown(OVRInput.RawButton.B))
+            //Si no tengo la linterna en la mano
+            if (collision.gameObject.tag != "HandL")
             {
+                //Lanzamiento Bola
+                if (OVRInput.GetDown(OVRInput.RawButton.B))
+                {
 
-                gameManager.ThrowingBall();
+                    gameManager.ThrowingBall();
 
+                }
             }
         }
 
-    }
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "HandR" || collision.gameObject.tag == "HandL")
         {
-           
             linterna.transform.position = socket.transform.position;
             linterna.transform.rotation = Quaternion.Euler(0, 0, 180);
-
             luz.enabled = false;
+
+           
         }
     }
-   
 }

@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
    
 
-    public GameObject canvasGameOver, canvaswWin;
+    public GameObject canvasGameOver, canvaswWin, enemy1,enemy2,enemy3;
 
     //BALL POOL SIZE
     public int ballPoolSize = 13; //Tamaño de la array de objetos a reciclar
@@ -25,22 +25,24 @@ public class GameManager : MonoBehaviour
     public int throwNumber = -1; //Número con la posición del array que toca activar y gestionar
     public Transform ballspawnpos;
 
+
     public Text textTimer, oleada;
     public float Timer; 
    
     public List<Transform> enemiespos = new List<Transform>();
-    public GameObject enemy1, enemy2, enemy3;
+    
     public static int currentWave = 0;
     
     void Start()
     {
-        EnemiesIngame();
+        
         BaterySearch();
         DoorSearch();
         EnemiesSpaenPos();
-
+        
         //Creamos la array con un tamaño igual al de la variable int primera
         balls = new GameObject[ballPoolSize];
+    
         //De forma secuencia gracias a un bucle for creamos todas las balas, recordar
         //que estas comienzan desactivadas con lo cual no se ejecutará su script y
         //saldrán todas disparadas a la vez. También fijaos en la posición de creación:
@@ -51,8 +53,10 @@ public class GameManager : MonoBehaviour
             ball.SetActive(false);
         }
 
-        
-    
+
+        EnemiesIngame();
+
+        OleadasEnemigos();
     }
     private void Update()
     {
@@ -76,8 +80,6 @@ public class GameManager : MonoBehaviour
            
         }
 
-      
-        
     }
 
     public void EnemiesSpaenPos()
@@ -133,39 +135,83 @@ public class GameManager : MonoBehaviour
         balls[throwNumber].SetActive(true);
     }
 
+    
+
+
     public void OleadasEnemigos()
     {
         if (currentWave == 0)
         {
-            Instantiate(enemy1, enemiespos[Random.Range(0, 4)]);
+            StartCoroutine(Aparicion1(4f));
         }
 
         if (currentWave == 1)
         {
-            Instantiate(enemy1, enemiespos[Random.Range(0, 4)]);
-            StartCoroutine("Aparicion2");
-            Instantiate(enemy2, enemiespos[Random.Range(0, 4)]);
+            StartCoroutine(Aparicion2(4f));
         }
 
         if (currentWave == 2)
         {
-            Instantiate(enemy1, enemiespos[Random.Range(0, 4)]);
-            StartCoroutine("Aparicion2");
-            Instantiate(enemy2, enemiespos[Random.Range(0, 4)]);
-            StartCoroutine("Aparicion");
-            Instantiate(enemy3, enemiespos[Random.Range(0, 4)]);
+            StartCoroutine(Aparicion3(4f));
         }
     }
 
-    IEnumerator Aparicion2()
+    IEnumerator Aparicion3(float time)
     {
-        yield return new WaitForSeconds(2f);
+        Instantiate(enemy3, enemiespos[0].transform.position, enemiespos[0].transform.rotation);
+        enemiesIngame.Add(enemy3);
+        yield return new WaitForSeconds(time);
+        Instantiate(enemy1, enemiespos[2].transform.position, enemiespos[2].transform.rotation);
+        enemiesIngame.Add(enemy1);
+        yield return new WaitForSeconds(time);
+        Instantiate(enemy2, enemiespos[1].transform.position, enemiespos[1].transform.rotation);
+        enemiesIngame.Add(enemy2);
+        yield return new WaitForSeconds(time);
+        Instantiate(enemy2, enemiespos[0].transform.position, enemiespos[0].transform.rotation);
+        enemiesIngame.Add(enemy2);
+        Instantiate(enemy3, enemiespos[3].transform.position, enemiespos[3].transform.rotation);
+        enemiesIngame.Add(enemy3);
+        
+       
+     
+    }
+    IEnumerator Aparicion2(float time)
+    {
+       
+        Instantiate(enemy2, enemiespos[1].transform.position, enemiespos[1].transform.rotation);
+        enemiesIngame.Add(enemy1);
+       
+      
+        yield return new WaitForSeconds(time);
+        Instantiate(enemy2, enemiespos[0].transform.position, enemiespos[0].transform.rotation);
+        enemiesIngame.Add(enemy2);
+        yield return new WaitForSeconds(time);
+        Instantiate(enemy1, enemiespos[1].transform.position, enemiespos[1].transform.rotation);
+        enemiesIngame.Add(enemy1);
+        yield return new WaitForSeconds(time);
+        Instantiate(enemy1, enemiespos[2].transform.position, enemiespos[2].transform.rotation);
+        enemiesIngame.Add(enemy1);
+        yield return new WaitForSeconds(time);
+       Instantiate(enemy2, enemiespos[3].transform.position, enemiespos[3].transform.rotation);
+        enemiesIngame.Add(enemy2);
+    }
+    IEnumerator Aparicion1(float time)
+    {
+        Instantiate(enemy1, enemiespos[0].transform.position, enemiespos[0].transform.rotation);
+        enemiesIngame.Add(enemy1);
+        yield return new WaitForSeconds(time);
+        Instantiate(enemy1, enemiespos[2].transform.position, enemiespos[2].transform.rotation);
+        enemiesIngame.Add(enemy1);
+        yield return new WaitForSeconds(time);
+        Instantiate(enemy1, enemiespos[1].transform.position, enemiespos[1].transform.rotation);
+        enemiesIngame.Add(enemy1);
+        yield return new WaitForSeconds(time);
+        Instantiate(enemy1, enemiespos[3].transform.position, enemiespos[3].transform.rotation);
+        enemiesIngame.Add(enemy1);
+       
+       
     }
 
-    IEnumerator Aparicion()
-    {
-        yield return new WaitForSeconds(4f);
-    }
 
 
     public void Jugar()
