@@ -12,13 +12,14 @@ public class EnemyGolpe : Enemies
         agent = gameObject.GetComponent<NavMeshAgent>();
         manager = FindFirstObjectByType<GameManager>();
         linterna = FindFirstObjectByType<Linterna>();
-       // ERROR canvas = gameObject.GetComponent<GameObject>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
         EnemyMovement();
+        
      
     }
     private void OnCollisionEnter(Collision collision)
@@ -26,7 +27,7 @@ public class EnemyGolpe : Enemies
         if (collision.gameObject.tag == "Ball")
         {
             Destroy(this.gameObject);
-            manager.enemiesdefeat++;
+            //manager.enemiesdefeat++;
         }
     }
 

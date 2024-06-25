@@ -11,16 +11,15 @@ public class Enemies : MonoBehaviour
     public int currentBatery, currentPuerta;
     public GameManager manager;
     public Linterna linterna;
-    public GameObject canvas;
- 
-  
+   
+
 
     private void Start()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
         manager = FindFirstObjectByType<GameManager>();
         linterna = FindFirstObjectByType<Linterna>();
-        // EEEROR CANVAS GAME OBJECT HAY QUE PONERLO NE JERARQUIA canvas = FindFirstObjectByType<GameObject>();
+      
 
 
 
@@ -31,21 +30,20 @@ public class Enemies : MonoBehaviour
     {
         if (linterna.detectado ==true)
         {
-          
+            print("me asusto");
             EnemyHide();
         }
         else
         {
             EnemyMovement();
         }
-      
-       
-  
+
     }
 
    
    public void EnemyMovement()
     {
+        print("muevo");
         float value = Mathf.Infinity; // Resetea el valor 
 
         // Recorro la array de baterias en busca de la mas cercana
@@ -66,11 +64,13 @@ public class Enemies : MonoBehaviour
         if (manager.bateries.Count > 0)
         {
             agent.SetDestination(manager.bateries[currentBatery].transform.position);
+         
         }
         else
         {
-            agent.speed = 0; 
-           canvas.SetActive(true);
+            agent.speed = 0;
+           manager.canvasGameOver.SetActive(true);
+               
 
         }
 

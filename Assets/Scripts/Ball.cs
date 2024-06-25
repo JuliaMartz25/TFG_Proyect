@@ -9,7 +9,7 @@ public class Ball : MonoBehaviour
   
     void Update()
     {
-        if (this.gameObject == null)
+      /*  if (this.gameObject == null)
         {
             timer = 0;
         }
@@ -28,7 +28,7 @@ public class Ball : MonoBehaviour
                 rigibody.useGravity = false;
             }
 
-        }
+        }*/
 
     }
 

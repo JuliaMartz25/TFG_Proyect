@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> bateries = new List<GameObject>();
     public List<GameObject> doors = new List<GameObject>();
 
+    public GameObject canvasGameOver, canvaswWin;
+
     //BALL POOL SIZE
     public int ballPoolSize = 13; //Tamaño de la array de objetos a reciclar
                                     //aconsejable los posibles sin reusar uno que no esté desactivado
@@ -17,16 +19,17 @@ public class GameManager : MonoBehaviour
     private GameObject[] balls; //Array de objetos a reciclar
     public int throwNumber = -1; //Número con la posición del array que toca activar y gestionar
     public Transform ballspawnpos;
+   
 
     //OLEADAS
-    public GameObject[] spawnPoints;
+    /*public GameObject[] spawnPoints;
     public GameObject[] enemies;
     public int waveCount;
     public int wave;
     public int enemyType;
     public bool spawning;
     private int enemiesSpawned;
-    public int enemiesdefeat;
+    public int enemiesdefeat;*/
 
     void Start()
     {
@@ -45,13 +48,13 @@ public class GameManager : MonoBehaviour
             ball.SetActive(false);
         }
 
-        waveCount = 2; //Enemigos que aumentan cada oleada
+        /*waveCount = 2; //Enemigos que aumentan cada oleada
         wave = 1;
         spawning = false;
-        enemiesSpawned = 0;
+        enemiesSpawned = 0;*/
     }
 
-    private void Update()
+    /*private void Update()
     {
         if(spawning == false && enemiesSpawned == enemiesdefeat) 
         {
@@ -95,7 +98,7 @@ public class GameManager : MonoBehaviour
         enemiesSpawned++;
 
 
-    }
+    }*/
     //OLEADAS FIN
     public void BaterySearch()
     {
@@ -145,7 +148,14 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-
+    public void GameOver()
+    {
+        canvasGameOver.SetActive(true);
+    }
+    public void Win()
+    {
+        canvaswWin.SetActive(true);
+    }
 
 
 

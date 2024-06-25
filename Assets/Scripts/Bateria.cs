@@ -18,9 +18,10 @@ public class Bateria : MonoBehaviour
     private float timer;
     public GameManager gameManager;
     
-    private Renderer renderObj;
+    public Renderer renderObj;
     public Color defaultcolor;
     public Color newcolor;
+    public Color greencolor;
     private void Start()
     {
         renderObj = GetComponent<Renderer>();
@@ -45,6 +46,11 @@ public class Bateria : MonoBehaviour
             gameManager.bateries.Remove(this.gameObject);
             
            
+        }
+       
+        if(vidaActual>= 100)
+        {
+            renderObj.material.color = defaultcolor;
         }
 
     }

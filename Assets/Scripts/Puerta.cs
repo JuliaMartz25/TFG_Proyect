@@ -11,8 +11,8 @@ public class Puerta : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Destroy(collision.gameObject);
-            linterna.detectado = false;
-            _manager.enemiesdefeat++;
+           
+           
         }
     }
    

@@ -12,42 +12,46 @@ public class Linterna : MonoBehaviour
     RaycastHit hit;
     int layerMask = 1<<6;
     public GameManager gameManager;
-    public  bool detectado;
+    public  bool detectado, luzencendida;
     
     private void Start()
     {
-        luz.enabled = false;
+       
     }
     private void Update()
     {
-        
+        print("luz"+luzencendida);
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask) && luzencendida == true)
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
+            Debug.Log("Did Hit");
+            detectado = true;
+
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.red);
+            Debug.Log("Did not Hit");
+
+        }
     }
     public void EncenderLinternaR()
     {
 
-        if (OVRInput.GetDown(OVRInput.RawButton.A) && luz.enabled == false)
+        if (OVRInput.GetDown(OVRInput.RawButton.A) && luz.enabled == true )
         {
           
-            luz.enabled = true;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layerMask))
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit");
-                detectado = true;
- 
-            }
-            else
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.red);
-                Debug.Log("Did not Hit");
-             
-            }
+            luz.enabled = false;
+
+           luzencendida = true;
+
 
         }
-        else if (OVRInput.GetDown(OVRInput.RawButton.A)  && luz.enabled == true)
+        else if (OVRInput.GetDown(OVRInput.RawButton.A)  && luz.enabled == false)
         {
 
-            luz.enabled = false;
+            luz.enabled = true;
+            luzencendida = false;
         }
 
     }
@@ -57,12 +61,15 @@ public class Linterna : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.RawButton.X) && luz.enabled == false)
         {
             luz.enabled = true;
+            luzencendida = true;
+
 
         }
         else if (OVRInput.GetDown(OVRInput.RawButton.X) && luz.enabled == true)
         {
 
             luz.enabled = false;
+            luzencendida = false;
         }
 
     }
@@ -72,7 +79,8 @@ public class Linterna : MonoBehaviour
         {
            
             EncenderLinternaR();
-    
+
+
         }
         if(collision.gameObject.tag != "HandR")
         {
@@ -89,11 +97,12 @@ public class Linterna : MonoBehaviour
         {
            
             EncenderLinternaL();
- 
+
+          
         }
 
         //Si no tengo la linterna en la mano
-        if (collision.gameObject.tag != "HandL")
+        if (collision.gameObject.tag != "HandL" )
         {
             //Lanzamiento Bola
             if (OVRInput.GetDown(OVRInput.RawButton.B))
