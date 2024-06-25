@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentWave == 0)
         {
-            StartCoroutine(Aparicion1(4f));
+           // StartCoroutine(Aparicion1(4f));
         }
 
         if (currentWave == 1)
@@ -167,10 +167,7 @@ public class GameManager : MonoBehaviour
         Instantiate(enemy2, enemiespos[1].transform.position, enemiespos[1].transform.rotation);
         enemiesIngame.Add(enemy2);
         yield return new WaitForSeconds(time);
-        Instantiate(enemy2, enemiespos[0].transform.position, enemiespos[0].transform.rotation);
-        enemiesIngame.Add(enemy2);
-        Instantiate(enemy3, enemiespos[3].transform.position, enemiespos[3].transform.rotation);
-        enemiesIngame.Add(enemy3);
+     
         
        
      
@@ -180,8 +177,6 @@ public class GameManager : MonoBehaviour
        
         Instantiate(enemy2, enemiespos[1].transform.position, enemiespos[1].transform.rotation);
         enemiesIngame.Add(enemy1);
-       
-      
         yield return new WaitForSeconds(time);
         Instantiate(enemy2, enemiespos[0].transform.position, enemiespos[0].transform.rotation);
         enemiesIngame.Add(enemy2);
@@ -189,15 +184,11 @@ public class GameManager : MonoBehaviour
         Instantiate(enemy1, enemiespos[1].transform.position, enemiespos[1].transform.rotation);
         enemiesIngame.Add(enemy1);
         yield return new WaitForSeconds(time);
-        Instantiate(enemy1, enemiespos[2].transform.position, enemiespos[2].transform.rotation);
-        enemiesIngame.Add(enemy1);
-        yield return new WaitForSeconds(time);
-       Instantiate(enemy2, enemiespos[3].transform.position, enemiespos[3].transform.rotation);
-        enemiesIngame.Add(enemy2);
+       
     }
-    IEnumerator Aparicion1(float time)
-    {
-        Instantiate(enemy1, enemiespos[0].transform.position, enemiespos[0].transform.rotation);
+   // IEnumerator Aparicion1(float time)
+    //{
+       /* Instantiate(enemy1, enemiespos[0].transform.position, enemiespos[0].transform.rotation);
         enemiesIngame.Add(enemy1);
         yield return new WaitForSeconds(time);
         Instantiate(enemy1, enemiespos[2].transform.position, enemiespos[2].transform.rotation);
@@ -207,16 +198,17 @@ public class GameManager : MonoBehaviour
         enemiesIngame.Add(enemy1);
         yield return new WaitForSeconds(time);
         Instantiate(enemy1, enemiespos[3].transform.position, enemiespos[3].transform.rotation);
-        enemiesIngame.Add(enemy1);
+        enemiesIngame.Add(enemy1);*/
        
        
-    }
+   // }
 
 
 
     public void Jugar()
     {
         SceneManager.LoadScene(1);
+        Time.timeScale = 1;
     }
     public void Seguir()
     {
